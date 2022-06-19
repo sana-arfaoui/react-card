@@ -30,7 +30,7 @@ class App extends Component {
                   <Alert key="danger" variant="danger">
                     Hidden ..
                   </Alert>
-                  <h5 style={{color:"BlueViolet"}}>Mounted since: {this.state.countshow} s</h5>
+                  {/* <h5 style={{color:"BlueViolet"}}>Mounted since: {this.state.countshow} s</h5> */}
                 </>
               </Card.Body>
               <Button variant="primary" onClick={this.handleClick}>
