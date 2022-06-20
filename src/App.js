@@ -40,48 +40,104 @@ class App extends Component {
           </div>
         </div>
       );
-    } else {
+    }else {
       return (
-        <div className="App">
-          <div className="header-app" >
-            <Card style={{ width: "30rem" }}>
-              <Card.Img
-                variant="top"
-                src={this.state.imgUrl}
-                alt="profilephoto"
-              />
-              <Card.Body>
-                <Card.Title>
-                  <h1 style={{ color: "gray" }}>{this.state.fullName}</h1>
-                </Card.Title>
-                <Card.Text>
-                  <h5>{this.state.profession}</h5>
-                  <h5>{this.state.bio}</h5>
-                  <h5 style={{ color: " BlueViolet" }}>
-                    Mounted since: {this.state.countshow} s
-                  </h5>
-                </Card.Text>
-                <Button variant="primary" onClick={this.handleClick}>
-                  {this.state.hide ? "Show" : "Hide"}
-                </Button>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
+        <Profil
+          {...this.state}
+          click={this.handleClick}
+          changeCounter={this.setState}
+        />
       );
     }
   }
+}
+class Profil extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      countshow: 0
+    };
+  }
+  render() {
+    return (
+      <div>
+        <div className="header-app">
+          <Card style={{ width: "30rem" }}>
+            <Card.Img
+              variant="top"
+              src={this.props.imgUrl}
+              alt="profilephoto"
+            />
+            <Card.Body>
+              <Card.Title>
+                <h1 style={{ color: "blue" }}>{this.props.fullName}</h1>
+              </Card.Title>
+              <Card.Text>
+                <h5>{this.props.profession}</h5>
+                <h5>{this.props.bio}</h5>
+                <h5 style={{ color: "red" }}>
+                  Mounted since: {this.state.countshow} s
+                </h5>
+              </Card.Text>
+              <Button variant="primary" onClick={this.props.click}>
+                {this.props.hide ? "Show" : "Hide"}
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+    );
+  }
   componentDidMount() {
-    if (!this.state.hide) {
-      const intervalId = setInterval(() => {
-        this.setState((prevState) => {
-          return {
-            countshow: prevState.countshow + 1,
-          };
-        });
+    console.log("did mount");
+    if (!this.props.hide) {
+      setInterval(() => {
+        this.setState({ countshow: this.state.countshow + 1 });
       }, 1000);
     }
   }
+  //   } else {
+  //     return (
+  //       <div className="App">
+  //         <div className="header-app" >
+  //           <Card style={{ width: "30rem" }}>
+  //             <Card.Img
+  //               variant="top"
+  //               src={this.state.imgUrl}
+  //               alt="profilephoto"
+  //             />
+  //             <Card.Body>
+  //               <Card.Title>
+  //                 <h1 style={{ color: "gray" }}>{this.state.fullName}</h1>
+  //               </Card.Title>
+  //               <Card.Text>
+  //                 <h5>{this.state.profession}</h5>
+  //                 <h5>{this.state.bio}</h5>
+  //                 <h5 style={{ color: " BlueViolet" }}>
+  //                   Mounted since: {this.state.countshow} s
+  //                 </h5>
+  //               </Card.Text>
+  //               <Button variant="primary" onClick={this.handleClick}>
+  //                 {this.state.hide ? "Show" : "Hide"}
+  //               </Button>
+  //             </Card.Body>
+  //           </Card>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
+  // componentDidMount() {
+  //   if (!this.state.hide) {
+  //     const intervalId = setInterval(() => {
+  //       this.setState((prevState) => {
+  //         return {
+  //           countshow: prevState.countshow + 1,
+  //         };
+  //       });
+  //     }, 1000);
+  //   }
+  // }
 }
 
 export default App;
